@@ -10,13 +10,16 @@ var hurted = false
 var knockback_dir = 1
 var knockback_int = 400
 onready var raycasts = $raycasts
+var UP = Vector2.UP
 
 func _physics_process(delta: float) -> void:
 	velocity.y += gravity * delta
+	velocity.x = 0
 	
-	_get_input()
+	if !hurted:
+		_get_input()
 	
-	velocity = move_and_slide(velocity)
+	velocity = move_and_slide(velocity, UP)
 	
 	is_grounded = _check_is_ground()
 	

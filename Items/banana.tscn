@@ -130,6 +130,7 @@ tracks/2/keys = {
 [node name="banana" type="Area2D"]
 collision_layer = 4
 script = ExtResource( 3 )
+fruits = 3
 
 [node name="banana" type="Sprite" parent="."]
 texture = ExtResource( 4 )
