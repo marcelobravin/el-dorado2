@@ -5,12 +5,19 @@ var move_speed = 480
 var gravity = 1200
 var jump_force = -720
 var is_grounded
-var health = 3
+var player_health = 3
+var max_health = 3
 var hurted = false
 var knockback_dir = 1
 var knockback_int = 400
 onready var raycasts = $raycasts
 var UP = Vector2.UP
+signal change_life(player_health)
+
+func _ready() -> void:
+	connect("change_life", get_parent().get_node("HUD/HBoxContainer/Holder"), "on_change_life")
+	emit_signal("change_life", max_health)
+#	position.x = Global.checkpoint_pos # posicao inicial do jogador na fase
 
 func _physics_process(delta: float) -> void:
 	velocity.y += gravity * delta
@@ -31,9 +38,6 @@ func _physics_process(delta: float) -> void:
 			collision.collider.collide_with(collision, self)
 	
 #	print(velocity.y)
-
-func _ready():
-	pass
 
 func _get_input():
 	velocity.x = 0
@@ -73,20 +77,29 @@ func _set_animation():
 		$anim.play(anim)
 
 func knockback():
-	velocity.x = -knockback_dir * knockback_int
+	if $right.is_colliding():
+		velocity.x = -knockback_dir * knockback_int
+	
+	if $left.is_colliding():
+		velocity.x = knockback_dir * knockback_int
+	
 	velocity.y -= 80
 	velocity = move_and_slide(velocity)
 
 func _on_hurtbox_body_entered(body):
 	knockback()
-	health -= 1
+	player_health -= 1
 	
 	hurted = true
+	emit_signal("change_life", player_health)
 	get_node("hurtbox/collision").set_deferred("disabled", true)
 	yield( get_tree().create_timer(.5), "timeout" )
 	get_node("hurtbox/collision").set_deferred("disabled", false)
 	hurted = false
 	
-	if health < 1:
+	if player_health < 1:
 		queue_free()
 		get_tree().reload_current_scene()
+
+func hit_checkpoint():
+	Global.checkpoint_pos = position.x

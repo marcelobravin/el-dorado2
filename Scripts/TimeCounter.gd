@@ -3,10 +3,12 @@ extends Control
 export (int) var minutes = 0
 export (int) var seconds = 0
 
+# Called when the node enters the scene tree for the first time.
 func _process(delta: float) -> void:
 	if minutes > 0 and seconds <= 0:
 		minutes -= 1
-		seconds = 60
+		seconds = 59
+#		seconds = 60
 	
 	if seconds >= 10:
 		$seconds.set_text(":" + str(seconds))
