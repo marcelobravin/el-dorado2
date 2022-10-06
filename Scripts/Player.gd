@@ -15,7 +15,11 @@ var UP = Vector2.UP
 signal change_life(player_health)
 
 func _ready() -> void:
-	connect("change_life", get_parent().get_node("HUD/HBoxContainer/Holder"), "on_change_life")
+	Global.set("player", self)
+	var error_code = connect("change_life", get_parent().get_node("HUD/HBoxContainer/Holder"), "on_change_life")
+	if error_code != 0:
+		print("Error: ", error_code)
+	
 	emit_signal("change_life", max_health)
 #	position.x = Global.checkpoint_pos # posicao inicial do jogador na fase
 
@@ -46,6 +50,7 @@ func _get_input():
 	
 	if move_direction !=0:
 		$texture.scale.x = move_direction
+		$steps_fx.scale.x = -move_direction
 		knockback_dir = move_direction
 
 func _input(event: InputEvent) -> void:
@@ -66,6 +71,7 @@ func _set_animation():
 		anim = "jump"
 	elif velocity.x != 0:
 		anim = "run"
+		$steps_fx.set_emitting(true)
 	
 	if velocity.y > 0 and !is_grounded:
 		anim = "fall"
@@ -86,7 +92,7 @@ func knockback():
 	velocity.y -= 80
 	velocity = move_and_slide(velocity)
 
-func _on_hurtbox_body_entered(body):
+func _on_hurtbox_body_entered(_body):
 	knockback()
 	player_health -= 1
 	
@@ -99,7 +105,15 @@ func _on_hurtbox_body_entered(body):
 	
 	if player_health < 1:
 		queue_free()
-		get_tree().reload_current_scene()
+		
+		var error_code = get_tree().reload_current_scene()
+		if error_code != 0:
+			print("Error: ", error_code)
+		
 
 func hit_checkpoint():
 	Global.checkpoint_pos = position.x
+
+func _on_head_collider_body_entered(body):
+	if body.has_method("destroy"):
+		body.destroy()

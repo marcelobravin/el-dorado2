@@ -5,7 +5,7 @@ export var fruits = 1
 func _ready():
 	pass
 
-func _on_items_body_entered(body: Node):
+func _on_items_body_entered(_body: Node):
 	$anim.play("collected")
 	Global.fruits += fruits
 	print(Global.fruits)

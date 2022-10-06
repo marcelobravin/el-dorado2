@@ -52,5 +52,5 @@ func _start_tween():
 	
 	tween.start()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	platform.position = platform.position.linear_interpolate(follow, .05)

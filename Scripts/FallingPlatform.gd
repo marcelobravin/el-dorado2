@@ -16,14 +16,14 @@ func _physics_process(delta: float) -> void:
 	velocity.y += gravity * delta
 	position += velocity * delta
 
-func collide_with(collision: KinematicCollision2D, collider: KinematicBody2D):
+func collide_with(_collision: KinematicCollision2D, _collider: KinematicBody2D):
 	if !is_triggered:
 		is_triggered = true
 		yield(get_tree().create_timer(1), "timeout")
 		anim.play("shake")
 		velocity = Vector2.ZERO
 
-func _on_anim_animation_finished(anim_name: String) -> void:
+func _on_anim_animation_finished(_anim_name: String) -> void:
 	set_physics_process(true)
 	timer.start(reset_timer)
 
