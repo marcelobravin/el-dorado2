@@ -37,6 +37,8 @@ func _on_hitbox_body_entered(body):
 	hitted = true
 	health -= 1
 	body.velocity.y = body.jump_force / 2
+	$hitFx.play()
+	
 	yield( get_tree().create_timer(.2), "timeout" )
 	hitted = false
 	

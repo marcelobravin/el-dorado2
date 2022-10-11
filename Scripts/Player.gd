@@ -56,6 +56,7 @@ func _get_input():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and is_grounded:
 		velocity.y = jump_force / 2
+		$jumpFX.play()
 
 func _check_is_ground():
 	for raycast in raycasts.get_children():
@@ -92,7 +93,20 @@ func knockback():
 	velocity.y -= 80
 	velocity = move_and_slide(velocity)
 
-func _on_hurtbox_body_entered(_body):
+func _on_hurtbox_body_entered(body):
+	hurt(body)
+
+func hit_checkpoint():
+	Global.checkpoint_pos = position.x
+
+func _on_head_collider_body_entered(body):
+	if body.has_method("destroy"):
+		body.destroy()
+
+func _on_hurtbox_area_entered(area):
+	hurt(area)
+
+func hurt(_body):
 	knockback()
 	player_health -= 1
 	
@@ -110,10 +124,3 @@ func _on_hurtbox_body_entered(_body):
 		if error_code != 0:
 			print("Error: ", error_code)
 		
-
-func hit_checkpoint():
-	Global.checkpoint_pos = position.x
-
-func _on_head_collider_body_entered(body):
-	if body.has_method("destroy"):
-		body.destroy()

@@ -7,4 +7,5 @@ extents = Vector2( 8.68626, 1.89901 )
 collision_layer = 64
 
 [node name="collision" type="CollisionShape2D" parent="."]
+modulate = Color( 0.952941, 1, 0.152941, 1 )
 shape = SubResource( 1 )

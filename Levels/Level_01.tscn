@@ -1110,9 +1110,6 @@ shape = SubResource( 40 )
 [node name="FallingPlatform6" parent="FallPlatforms" instance=ExtResource( 12 )]
 position = Vector2( 686, 132 )
 
-[node name="FallingPlatform" parent="FallPlatforms" instance=ExtResource( 12 )]
-position = Vector2( 128, 80 )
-
 [node name="FallingPlatform3" parent="FallPlatforms" instance=ExtResource( 12 )]
 position = Vector2( 918, 117 )
 
@@ -1122,10 +1119,8 @@ position = Vector2( 976, 91 )
 [node name="FallingPlatform5" parent="FallPlatforms" instance=ExtResource( 12 )]
 position = Vector2( 1033, 75 )
 
-[node name="FallingPlatform2" parent="FallPlatforms" instance=ExtResource( 12 )]
-position = Vector2( 161, 37 )
-
 [node name="MovPlatforms" type="Node2D" parent="."]
+position = Vector2( 1024, 8 )
 
 [node name="MovingPlatform" parent="MovPlatforms" instance=ExtResource( 13 )]
 position = Vector2( 70, 96 )
@@ -1146,6 +1141,9 @@ position = Vector2( 808, 96 )
 [node name="checkpoint3" parent="Checkpoints" instance=ExtResource( 16 )]
 position = Vector2( 1728, 128 )
 
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 32, 48 )
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource( 11 )]
@@ -1158,7 +1156,7 @@ position = Vector2( 568, 120 )
 position = Vector2( 1664, 168 )
 
 [node name="plantie" parent="Enemies" instance=ExtResource( 24 )]
-position = Vector2( 136, 112 )
+position = Vector2( 222, 145 )
 
 [node name="Birdie" parent="Enemies" instance=ExtResource( 23 )]
 position = Vector2( 280, 8 )
@@ -1173,11 +1171,8 @@ position = Vector2( 552, 88 )
 
 [node name="Transition_out" parent="." instance=ExtResource( 19 )]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 32, 48 )
-
 [node name="break_box" parent="." instance=ExtResource( 20 )]
-position = Vector2( 584, 72 )
+position = Vector2( 596, 92 )
 fruit_instance = [ ExtResource( 22 ), ExtResource( 21 ) ]
 fruits = 10
 

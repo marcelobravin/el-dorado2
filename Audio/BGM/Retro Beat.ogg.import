@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Retro Beat.ogg-96e3486b3e350bd04cf36b9b9759cbef.oggstr"
+
+[deps]
+
+source_file="res://Audio/BGM/Retro Beat.ogg"
+dest_files=[ "res://.import/Retro Beat.ogg-96e3486b3e350bd04cf36b9b9759cbef.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

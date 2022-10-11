@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Free/Items/Checkpoints/End/End (Idle).png" type="Texture" id=1]
 [ext_resource path="res://Scripts/goal.gd" type="Script" id=2]
+[ext_resource path="res://Audio/SE/level_completed.wav" type="AudioStream" id=3]
 
 [sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0.27037, 0.492593, 1 )
@@ -57,5 +58,8 @@ texture = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 10.5 )
 shape = SubResource( 1 )
+
+[node name="victoryFx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="." to="." method="_on_goal_body_entered"]
