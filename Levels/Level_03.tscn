@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://Scripts/Reset_level.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/goal.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Scenes/Mushroom.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Prefabs/Transition_in.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Prefabs/Transition_out.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Audio/BGM/Swinging Pants.ogg" type="AudioStream" id=20]
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -2769,6 +2770,10 @@ position = Vector2( 371, 111 )
 [node name="Transition_in" parent="." instance=ExtResource( 18 )]
 
 [node name="Transition_out" parent="." instance=ExtResource( 19 )]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 20 )
+autoplay = true
 
 [connection signal="body_entered" from="fallzone" to="fallzone" method="_on_fallzone_body_entered"]
 

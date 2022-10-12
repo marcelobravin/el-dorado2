@@ -6,9 +6,9 @@ func _ready():
 	pass
 
 func _on_items_body_entered(_body: Node):
+	$collectedFx.play()
 	$anim.play("collected")
 	Global.fruits += fruits
-	print(Global.fruits)
 
 func _on_anim_animation_finished(anim_name):
 	if anim_name == "collected":

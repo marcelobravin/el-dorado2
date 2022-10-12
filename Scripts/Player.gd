@@ -29,6 +29,14 @@ func _physics_process(delta: float) -> void:
 	
 	if !hurted:
 		_get_input()
+		
+	if $push_right.is_colliding():
+		var object = $push_right.get_collider()
+		object.move_and_slide(Vector2(30, 0) * move_speed * delta)
+	
+	if $push_left.is_colliding():
+		var object = $push_left.get_collider()
+		object.move_and_slide(Vector2(-30, 0) * move_speed * delta)
 	
 	velocity = move_and_slide(velocity, UP)
 	
@@ -52,6 +60,16 @@ func _get_input():
 		$texture.scale.x = move_direction
 		$steps_fx.scale.x = -move_direction
 		knockback_dir = move_direction
+	
+	if velocity.x > 1:
+		$push_right.set_enabled(true)
+	else:
+		$push_right.set_enabled(false)
+
+	if velocity.x < -1:
+		$push_left.set_enabled(true)
+	else:
+		$push_left.set_enabled(false)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and is_grounded:
